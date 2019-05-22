@@ -1,0 +1,224 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Bienvenue"
+{% endblock %}
+
+{% block body %} 
+
+    <!-- Slider -->
+    <div class="bd-example" id="SliderIndex">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img src="img/slider/slide01_big.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block " >
+                    <h1 class="txt-secondary">La piscine</h1>
+                    <p class= "inline-block bg-white">Piscine chauffée</p>
+                </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/slider/slide02_big.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block clearfix">
+                        <h1 class="txt-secondary">Location de mobil homes</h1>
+                        <p class= "inline-block bg-white"> Emplacement résidentiel et à l'année </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                <img src="img/slider/slide03_big.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="txt-secondary">Location d'emplacement de tente</h1>
+                    <p class= "inline-block bg-white">Pour partir en camping et profiter du beau temps</p>
+                </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+
+{# Bienvenue #}
+<div id="presentation">        
+    <div class="container">
+        <div class="row">
+            <div class="video-wrapper mt-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="video-container ">
+                    <iframe  width="560" height="315" src="https://www.youtube.com/embed/NObCYK0XQZs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="jumbotron mt-3 col-lg-8 col-md-6 col-sm-12">
+                <h1 class="display-3">Bienvenue au "Domaine les Ormes <span class="txt-secondary">**</span>"</h1>
+                <h2 class="txt-primary">Camping à Serques, Pas-de-Calais</h2>
+                <p class="lead">Vous souhaitez un endroit paisible et relaxant pour passer vos vacances, un week-end ou encore un séjour ? A Serques, dans le Pas-de-Calais, venez nombreux découvrir le camping du Domaine les Ormes !</p>
+                <p>Le <strong class="txt-primary">Camping** Domaine les Ormes</strong> est situé au beau milieu du marais audomarois labellisé UNESCO, dans le paisible village de Serques, à proximité de toutes commodités, à 10 km de la ville de Saint-Omer et à 30 km de Bergues.</p>
+                <p>Le corps de ferme restauré il y a une trentaine d'année, est composé de 86 emplacements (parcelle de passage, de locations saisonnière et résidentielle). Des parcelles sont encore disponibles pour la mise en place de mobil home à l'année. Une piscine couverte et chauffée et un bar sont à la disposition des vacanciers ou saisonniers qui séjournent au camping** <strong class="txt-primary">Domaine les Ormes dans le Pas de Calais.</strong></p>
+                <hr class="my-4">
+                <p>C'est avec plaisir que nous vous accueillerons au coeur du Marais audomarois</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">en savoir plus...</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- cards Nos locations -->
+    <div class="col">
+        <div class="card bg-light">
+            <div class="card-body bg-green-ormes mb-3">
+
+                <section id="locations" class="my-5 text-center">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col">
+                                <div class="info-header mb-5">
+                                    <h2 class="pb-3">Nos locations</h2>
+                                    <p class="lead pb-5">Au "Domaine les Ormes **" pour vos vacances, vous pouvez louer des mobil homes et des emplacements pour vos tentes, caravanes et camping-cars, et pour vos réceptions nous pouvons vous proposer la location de notre salle de réception. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-6" col-sm-12>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a href="#">
+                                            <img src="img/locations/mobil-home02.jpg" alt="Mobil home" class="img-fluid  w-100 mb-3">
+                                        </a>
+                                        <h3>La location de mobil homes</h3>
+                                        <p>Camper avec tout le confort dans votre mobil home ! Suffisamment spacieux pour accueillir toute une famille ou un groupe d'amis.</p>
+                                    </div>
+                                    <button type="button" class="btn btn-green-ormes btn-lg btn-block">en savoir plus</button>
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6" col-sm-12>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a href="#">
+                                            <img src="img/locations/tentes.jpg" alt="Emplacement de tente" class="img-fluid  w-100 mb-3">
+                                        </a>
+                                        <h3>La location d'emplacements</h3>
+                                        <p>Pour partir en camping et profiter du beau temps, quoi de mieux qu'un emplacement pour votre tente, votre caravane ou votre camping-car ? Retrouvez nos parcelles de terrain concues pour cela et amenez votre matériel adéquat.</p>
+                                    </div>
+                                    <button type="button" class="btn btn-green-ormes btn-lg btn-block">en savoir plus</button>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6" col-sm-12>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a href="#">
+                                            <img src="img/locations/salle_reception.jpg" alt="Mobil home" class="img-fluid  w-100 mb-3">
+                                        </a>
+                                        <h3>La location de salle de réception</h3>
+                                        <p>Venez découvrir notre salle de réception au camping les Ormes ! Idéale pour vos mariages, repas dinatoires, anniversaires, la salle de réception se transforme en véritable danc floor lors des soirées dansantes organisées.</p>
+                                    </div>
+                                    <button type="button" class="btn btn-green-ormes btn-lg btn-block">en savoir plus</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- cards Aux alentours -->
+    <div class="col">
+        <div class="card bg-light mb-3">
+            <div class="card-body bg-blue-ormes">
+                <section id="autour" class="my-5 text-center">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col">
+                                <div class="info-header mb-5">
+                                    <h2 class="pb-3">Autour de nous</h2>
+                                    <p class="lead pb-5">Vous séjournez au camping le Domaine les Ormes, à Serques ? Profitez de vos vacances pour découvrir la région du Nord-Pas-de-Calais et tout ce qu’elle propose ! </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-6" col-sm-12>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a href="#">
+                                            <img src="img/alentours/helfaut_coupole.jpeg" alt="La coupole d'Elfaut" class="img-fluid  w-100 mb-3">
+                                        </a>
+                                        <h3>La coupole d’Helfaut</h3>
+                                        <h4>centre d’Histoire et de Mémoire du Nord-Pas-de-Calais</h4>
+                                        <p>La coupole, située à 5 km de Saint-Omer, est à l’origine un bunker où a été transféré la production des armes V2 initialement prévue sur le site d’Eperlecques. Aujourd’hui, la coupole d’Helfaut, musée historique, dans le Pas-de-Calais, propose des visites et des animations inédites de l’occupation nazie à la conquête de l’espace.</p>
+                                    </div>
+                                        <button type="button" class="btn btn-blue-ormes btn-lg btn-block">en savoir plus</button>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6" col-sm-12>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <a href="#">
+                                                <img src="img/alentours/blockhaus_eperlecques.jpg" alt="Le Blockhaus d'Eperlecques" class="img-fluid  w-100 mb-3">
+                                            </a>
+                                            <h3>Le Blockhaus d'Eperlecques</h3>
+                                            <p>Au départ, le blockhaus d’Eperlecques était conçu pour être la première base de lancement des fusées V2, armes secrètes allemandes. La construction de ce site exigeait un grand terrain, de manière à ce qu’il y ait suffisamment d’emplacements : le lieu choisit est alors celui de la forêt d’Eperlecques. Le projet commence alors, nous sommes en mars 1943.</p>
+                                        </div>
+                                        <button type="button" class="btn btn-blue-ormes btn-lg btn-block">en savoir plus</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6" col-sm-12>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <a href="#">
+                                                <img src="img/alentours/cristallerie-arques.jpg" alt="La Cristallerie d'Arques" class="img-fluid  w-100 mb-3">
+                                            </a>
+                                            <h3>La Cristallerie d'Arques</h3>
+                                            <p>Le cristal interroge par son éclat, ses jeux de lumière et son raffinement. La beauté du cristal évoque en premier lieu le luxe, la délicatesse des verres finement décorés. Les assortiments de verres en cristal, par leur aspect, sauront embellir votre table. Véritable décoration, plus encore, un art de la table, le cristal sublimera vos repas ainsi que votre intérieur. 
+                                            <br>
+                                            Venez découvrir les arts de la table à la verrerie cristallerie d’Arques, dans le Pas-de-Calais, près de Saint-Omer.
+                                            </p>
+                                        </div>
+                                        <button type="button" class="btn btn-blue-ormes btn-lg btn-block">en savoir plus</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-4 col-sm-6" col-sm-12>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <a href="#">
+                                                <img src="img/alentours/saint-omer_maison-marais.jpg" alt="La maison du marais" class="img-fluid  w-100 mb-3">
+                                            </a>
+                                            <h3>La maison du marais</h3>
+                                            <p> LA MAISON DU MARAIS se veut être le point de départ d’un voyage au coeur d’une nature vivante et dépaysante. Cet espace culturel est un environnement propice à l’évasion et à la détente. Bienvenue dans un lieu ouvert sur le monde, imaginé pour marier le plaisir de la découverte et le partage de la connaissance...
+                                            <br>
+                                            Emerveillez vous, flânez, apprenez, qui que vous soyez, la Maison du Marais à sans doute a vous apporter.
+                                            </p>
+                                        </div>
+                                        <button type="button" class="btn btn-blue-ormes btn-lg btn-block">en savoir plus</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

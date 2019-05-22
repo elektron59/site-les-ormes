@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Domaine "les Ormes" - {% block title %}Bienvenue !{% endblock %}</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">    
+
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="{{ path('accueil') }}"><img src="img/site/logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+                                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#Visite" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Visite
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">La piscine</a>
+                            <a class="dropdown-item" href="#">Le bar</a>
+                            <a class="dropdown-item" href="#">La salle des fêtes</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item mr-1">
+                        <a href="#prestations" class="nav-link">Nos prestations</a>
+                    </li>
+                    <li class="nav-item mr-1">
+                        <a href="#voir" class="nav-link">A voir</a>
+                    </li>
+                    <li class="nav-item mr-1">
+                            <a href="#animations" class="nav-link">Animations</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#services" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Services
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">La vente de gaz</a>
+                            <a class="dropdown-item" href="#">Les sanitaires</a>
+                            <a class="dropdown-item" href="#">Les animations</a>
+                        </div>
+                    </li>
+                    <li class="nav-item mr-1">
+                            <a href="#tarifs" class="nav-link">Tarifs</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#mobilehome" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nos mobil-homes
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">A louer</a>
+                                <a class="dropdown-item" href="#">A vendre</a>
+                            </div>
+        
+                        </li>
+
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mon compte</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {% block body %}{% endblock %}
+        
+        {% block footer %}
+            <!-- Footer -->
+            <footer id="main-footer" class="text-left p-4 bg-primary">
+                <div class="container">
+                    <div class="row">
+                            <div class="col-lg-2 col-md-6 col-sm-12">
+                                <a href="#"><img src="img/site/logo.png" alt="logo domaine les Ormes"></a>
+                            </div>
+                
+                        <div class="col-lg-3 col-md-6 col-sm-12" >
+                            <a href="#">
+                                <h2>Domaine les Ormes</h2></a>       
+                                <h6>55 route de Watten, 62910 SERQUES</h6>
+                                <h6><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;03 21 93 11 71 &nbsp; <i class="fas fa-mobile-alt"></i>&nbsp; 06 79 10 98 17 &nbsp; <a href="https://www.facebook.com/camping.domainelesormes?ref=br_rs" target="_blank"><i class="fab fa-facebook-square txt-facebook"></i></h6>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+                            <a href="#"><img src="img/site/wifi.png" alt="logo wifi"></a> &nbsp;
+                            <a href="https://www.ancv.com/" target="_blank"><img src="img/site/ancv.png" alt="Site des chèques-vacances"></a>  &nbsp;
+                            <a href="https://www.vacaf.org/" target="_blank"><img src="img/site/vacaf.png" alt="Site du vacaf"></a>  &nbsp;                    
+                            
+                        </div>
+                        <div id="footer-link" class="col-lg-3 col-md-6 col-sm-12 text-right">
+                            
+                                <a href="#">Qui sommes-nous</a><br>
+                                <a href="#">Contact</a><br>
+                                <a href="#">Plan d'accès</a><br>
+                            
+                        </div>
+                            
+                    </div>
+                        <div class="col text-center">
+                            <br>
+                            <a href="#"> Mentions légales</a> &copy;
+                                <span id="year"></span> Domaine les Ormes
+                            </p>
+                        </div>
+                    
+                </div>
+            </footer>
+        {% endblock %}
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script>
+            // Générer Date
+            $('#year').text(new Date().getFullYear());
+        </script>
+        {% block javascripts %}{% endblock %}
+
+    </body>
+</html>

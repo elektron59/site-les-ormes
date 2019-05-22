@@ -1,0 +1,91 @@
+/* général */
+.txt-facebook{
+    color: #4267B2
+}
+    
+.txt-primary{
+    color: #820C0D
+}
+
+.txt-secondary{
+    color: #99cc01
+}
+
+.btn-green-ormes {
+    color: #fff;
+    background-color: #99cc01;
+    border-color: #99cc01;
+}
+.bg-green-ormes{
+    background-color: #b8dd48;
+
+}
+
+.btn-blue-ormes {
+    color: #fff;
+    background-color: #00549D;
+    border-color: #00549D;
+}
+
+
+.bg-blue-ormes{
+    background-color: #4B9890;
+
+}
+
+
+
+/* Video responsive */
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.video-wrapper {
+	width: 400px;
+	max-width: 100%;
+}
+
+/* Slider page Index */
+
+.inline-block{
+    display: inline-block;
+}
+.bg-white{
+    margin-bottom: 5px;
+    background: white;
+}
+#SliderIndex .inline-block{
+    display: inline-block;
+}
+#SliderIndex h1{
+    font-size: 3.5vmax;
+    font-family: sans-serif;
+    text-shadow: 2px 2px #000;
+}
+#SliderIndex p{
+    color: #000;
+    font-size: larger; 
+}
+
+/* footer */
+#main-footer a{
+    color: white;
+}
+
+#main-footer h6{
+    color: white;
+}
