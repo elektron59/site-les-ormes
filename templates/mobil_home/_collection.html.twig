@@ -1,0 +1,39 @@
+{% block _annonce_images_widget %} {# _[nom]_widget permet de modifier la sortie de form_widget() sur un champ donné#}
+    <p>Ici, vous pouvez ajouter vos images</p>
+
+    {{ form_widget(form) }}
+    {# gere un compteur pour les index des sous formulaires images#}
+    <input type="hidden" id="widgets-counter" value="0">
+
+    <div class="form-group">
+        <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
+    </div>
+{% endblock %}
+
+{% block _annonce_images_entry_row %} {# supprime l'affichage de l'index #}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _annonce_images_entry_widget %} {# Gère l'affichage des entry de la collection #}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-10">
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form_widget(form.url) }}
+                        {{form_errors(form.url)}}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.legende) }}
+                        {{form_errors(form.legende)}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2 mb-3">
+                <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

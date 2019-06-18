@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Création d'une annonce de location de Mobil home{% endblock %}
+
+{% form_theme form 'mobil_home/_collection.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Créer une nouvelle annonce</h1>
+
+        {{ form_start(form) }} {# permet d'afficher la balise ouvrante <form> avec l'action et la méthode #}
+
+        {{ form_widget(form) }} {# affiche un champ ou un groupe de champs #}
+
+            <button type="submit" class="btn btn-primary">Créer la nouvelle annonce</button>
+
+        {{ form_end(form )}} {# Affiche la fin du formulaire et inclue un jeton CSRF pour la sécurité #}
+
+    </div>
+
+{% endblock %} 
+
+
+{% block javascripts %}
+
+<script src="/js/annonce.js"></script>
+
+{% endblock %}

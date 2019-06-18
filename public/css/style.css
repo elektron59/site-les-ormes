@@ -1,4 +1,7 @@
 /* général */
+div.container {
+    margin-top: 20px;
+}
 .txt-facebook{
     color: #4267B2
 }
@@ -16,10 +19,17 @@
     background-color: #99cc01;
     border-color: #99cc01;
 }
+
 .bg-green-ormes{
     background-color: #b8dd48;
 
 }
+
+.bg-green-ormes-light{
+    background-color: #99cc011f;
+
+}
+
 
 .btn-blue-ormes {
     color: #fff;
@@ -88,4 +98,25 @@
 
 #main-footer h6{
     color: white;
+}
+/* page location MH */
+#location h6{
+    color: #820C0D;
+    font-style: italic;
+}
+
+/* annonces */
+div.annonce-title {
+    padding: 2em;
+    background-size: cover;
+    background-position: center center;
+}
+
+div.annonce-title h1, div.annonce-title p {
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+div.carousel-caption {
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 1);
 }
