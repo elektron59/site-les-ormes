@@ -3,17 +3,56 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\MobilHome;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder){
+        $this->encoder = $encoder;
+    }
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('FR-fr');
 
+        // Nous gérons les utilisateurs
+        $users = [];
+        $genres = ['male', 'female'];
+
+        for($i = 1; $i <=10; $i++){
+            $user = new User();
+
+            $genre = $faker->randomElement($genres);
+
+            $picture = 'https://randomuser.me/api/portraits/';
+            $pictureId = $faker->numberBetween(1, 99).'.jpg';
+
+            if($genre == "male") $picture = $picture.'men/'.$pictureId;
+            else $picture = $picture.'women/'.$pictureId;
+
+            $presentation = '<p>'.join('</p><p>',$faker->paragraphs(3)).'</p>'; // Génère une liste avec 3 lignes, contenant un paragraphe en Lorem
+
+            $hash = $this->encoder->encodePassword($user, 'password');
+
+            $user   ->setPrenom($faker->firstname($genre))
+                    ->setNom($faker->lastname)
+                    ->setEmail($faker->email)
+                    ->setPresentation($presentation)
+                    ->setHash($hash)
+                    ->setAvatar($picture);
+
+            $manager->persist($user);
+            $users[] = $user;
+        }
+
+        
+        // Nous gérons les annonces
         for($i = 1; $i <= 15; $i++) {
             $mobilHome = new MobilHome();
 
@@ -21,6 +60,9 @@ class AppFixtures extends Fixture
             //$image = $faker->imageUrl(1000,350,'nature',true,'Domaine les Ormes');// Génère des images aléatoires, provenant de lorempixel.com, de type nature et signées "Domaine les Ormes"
             $detail = '<li>'.join('</li><li>',$faker->paragraphs(5)).'</li>'; // Génère une liste avec 5 lignes, contenant un paragraphe en Lorem
             $presentation = '<p>'.join('</p><p>',$faker->paragraphs(1)).'</p>'; // Génère une liste avec 5 lignes, contenant un paragraphe en Lorem
+
+            $user = $users[mt_rand(0, count($users)-1)];
+
             $mobilHome  ->setNomMh($nom)
                         ->setEmplacementMh("Parcelle numéro-$i")
                         ->setAnneeMh(mt_rand(2003, 2019)) // donne une année aléatoire entre 2003 et 2019
@@ -34,7 +76,8 @@ class AppFixtures extends Fixture
                         ->setNbChambreMh(mt_rand(1, 3))
                         ->setNbPersonneMh(mt_rand(1, 6))
                         ->setDetailMh("<ul>$detail</ul>")
-                        ->setPresentationMh($presentation);
+                        ->setPresentationMh($presentation)
+                        ->setAuteur($user);
             
             for($j = 1; $j <= mt_rand(2,5); $j++) { // la boucle va créer entre 2 et 5 images par mobil home
                 $image = new Image();

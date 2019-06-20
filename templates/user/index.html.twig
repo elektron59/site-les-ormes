@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de {{user.fullname}}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-3 text-center">
+                <img src="{{user.avatar}}" class="avatar mb-3 " alt="Avatar de {{user.fullName}}">
+                <br>
+                <span class="badge badge-primary">{{user.mobilHomes | length}} annonces</span>
+            </div>
+            <div class="col-9">
+                <h1>{{user.fullName}}</h1>
+                {% if user is same as(app.user) %} {# Est-ce que l'utilisateur affiché est le même que celui connecté #}
+                    <div class="mt-3">
+                        <a href="{{ path('account_profile') }}" class="btn btn-primary mr-2 mb-2">Modifier mes informations</a>
+                        <a href="{{ path('account_password') }}" class="btn btn-primary mr-2 mb-2">Modifier mon mot de passe</a>
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>
+
+        {{user.presentation | raw }}
+
+        <hr>
+
+        <h2>Les annonces de {{user.fullName}}</h2>
+
+        {% if user.mobilHomes | length > 0 %} {# Si l'utilisateur a des annonces #}
+            <div class="row">
+                {% for mobilhome in user.mobilHomes %} {# pour chaque Mobil home #}
+                    {% include "mobil_home/_annonce.html.twig" %} {# importe la page de présentation des annonces#}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning">
+                <p>
+                    <strong>{{user.fullName}}</strong> n'a pas encore d'annonce sur le site !
+                </p>
+            </div>
+        {% endif %}
+        
+    </div>
+
+{% endblock %}

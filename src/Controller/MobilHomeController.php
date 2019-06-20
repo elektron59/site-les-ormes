@@ -47,6 +47,8 @@ class MobilHomeController extends AbstractController
                 $manager->persist($image);
             }
 
+            $mobilhome->setAuteur($this->getUser());// on recupère l'utilisateur connecté
+
             $manager-> persist($mobilhome);// prévient Doctrine qu'on veut sauver
             $manager-> flush(); // envoie la requête SQL
             

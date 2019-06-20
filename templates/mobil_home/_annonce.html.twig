@@ -1,0 +1,22 @@
+{% set url = path('annonces_show', {'slugMh': mobilhome.slugMh}) %}
+<div class="col-lg-3 col-md-4 col-sm-12">
+    <div class="card bg-green-ormes-light">
+        <div class="card-body">
+            <a href="{{ url }}">
+                <img src="{{ mobilhome.photoPrincipaleMh }}" alt="Mobil home" class="rounded img-fluid  w-100 mb-3">
+            </a>
+            <h3 class="text-center">
+                <a href="{{ url }}">
+                    {{ mobilhome.nomMh }}
+                </a>
+            </h3>
+            <h6 class="text-center">
+                {{ mobilhome.surfaceMh }} m2 - {{ mobilhome.nbChambreMh }} chambre(s) - {{ mobilhome.nbpersonneMh }} personnes
+            </h6>
+            {{ mobilhome.presentationMh | raw }} {# le filtre raw permet de faire interpréter le code html contenu dans la base de données par le navigateur#}
+            <H4>A partir de {{ mobilhome.tarifJourHsMh }} &euro; par jour ou {{ mobilhome.tarifSemaineHsMh }} &euro; par semaine (hors saison)</H4>
+        </div>
+        <a href="{{ url }}" class="btn btn-green-ormes btn-lg btn-block">en savoir plus</a>
+    </div>
+    <br>
+</div>

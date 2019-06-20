@@ -131,6 +131,12 @@ class MobilHome
      */
     private $presentationMh;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="mobilHomes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $auteur;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -348,6 +354,18 @@ class MobilHome
     public function setPresentationMh(string $presentationMh): self
     {
         $this->presentationMh = $presentationMh;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): self
+    {
+        $this->auteur = $auteur;
 
         return $this;
     }
