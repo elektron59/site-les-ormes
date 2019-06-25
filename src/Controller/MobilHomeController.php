@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MobilHomeController extends AbstractController
@@ -30,6 +32,7 @@ class MobilHomeController extends AbstractController
      * Permet de créer une annonce de location de Mobil home
      * 
      * @Route("/mobilhomes/new", name="annonce_create")
+     * @IsGranted("ROLE_ADMIN")
      *
      * @return Response
      */
@@ -69,6 +72,7 @@ class MobilHomeController extends AbstractController
      * Permet d'afficher le formulaire d'édition
      *
      * @Route("/mobilhomes/{slugMh}/edit", name="annonces_edit")
+     * @Security("is_granted('ROLE_ADMIN') and user === mobilhome.getAuteur()", message=" Cette annonce ne vous appartient pas, vous ne pouvez pas la modifier.")
      * 
      * @return Response
      */
@@ -118,6 +122,28 @@ class MobilHomeController extends AbstractController
             return $this->render('mobil_home/show_annonce_mh.html.twig', [
                 'annonce' => $annonce
         ]);
+    }
+
+    /**
+     * Permet de supprimer une annonce
+     * 
+     * @Route("/mobilHome/{slugMh}/delete", name="annonces_delete")
+     * @Security("is_granted('ROLE_USER') and user === annonce.getAuteur()", message="Vous n'avez pas le droit d'accéder à cette ressource")
+     *
+     * @param MobilHome $annonce
+     * @param ObjectManager $manager
+     * @return Response
+     */
+    public function delete(MobilHome $annonce, ObjectManager $manager){
+        $manager->remove($annonce);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "L'annonce <strong>{$annonce->getNomMh()}</strong> a bien été supprimée !"
+        );
+
+        return $this->redirectToRoute("mobilhome_location");
     }
 
 

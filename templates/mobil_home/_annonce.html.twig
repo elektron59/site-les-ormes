@@ -16,7 +16,17 @@
             {{ mobilhome.presentationMh | raw }} {# le filtre raw permet de faire interpréter le code html contenu dans la base de données par le navigateur#}
             <H4>A partir de {{ mobilhome.tarifJourHsMh }} &euro; par jour ou {{ mobilhome.tarifSemaineHsMh }} &euro; par semaine (hors saison)</H4>
         </div>
-        <a href="{{ url }}" class="btn btn-green-ormes btn-lg btn-block">en savoir plus</a>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{ url }}" class="btn btn-green-ormes btn-lg btn-block mb-2">en savoir plus</a>
+            </div>
+            <div class="col-md-6">
+                {% if app.user and app.user == mobilhome.auteur %}
+                    <a href="{{ path('annonces_edit',{'slugMh':mobilhome.slugMh}) }}" class="btn btn-green-ormes btn-lg btn-block mb-2">Modifier</a>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
     <br>
 </div>

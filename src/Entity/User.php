@@ -79,6 +79,11 @@ class User implements UserInterface
     private $mobilHomes;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="users")
+     */
+    private $userRoles;
+
+    /**
      * Concatene le prénom et le nom de l'utilisateur
      */
     public function getFullName() {
@@ -105,6 +110,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->mobilHomes = new ArrayCollection();
+        $this->userRoles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,7 +234,13 @@ class User implements UserInterface
     }
 
     public function getRoles() {
-        return ['ROLE_USER'];
+        $roles = $this->userRoles->map(function($role){
+            return $role->getTitle();
+        })->toArray();
+
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
     }
 
     public function getPassword() {
@@ -242,4 +254,32 @@ class User implements UserInterface
     }
 
     public function eraseCredentials() {}
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getUserRoles(): Collection
+    {
+        return $this->userRoles;
+    }
+
+    public function addUserRole(Role $userRoles): self
+    {
+        if (!$this->userRoles->contains($userRoles)) {
+            $this->userRoles[] = $userRoles;
+            $userRoles->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRoles(Role $userRoles): self
+    {
+        if ($this->userRoles->contains($userRoles)) {
+            $this->userRoles->removeElement($userRoles);
+            $userRoles->removeUser($this);
+        }
+
+        return $this;
+    }
 }
