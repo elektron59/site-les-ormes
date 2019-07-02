@@ -7,6 +7,7 @@ use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\MobilHome;
+use App\Entity\Reservation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -105,7 +106,35 @@ class AppFixtures extends Fixture
 
                 $manager->persist($image);
             }
-                        
+
+            // Gestion des réservations
+            for ($j=1; $j <= mt_rand(0, 10); $j++) { 
+                $reservation =  new Reservation();
+
+                $createdAt = $faker->dateTimeBetween('-6 months'); // génère une date de moins de 6 mois
+                $dateArrivee = $faker->dateTimeBetween('-3 months'); //génère une date de moins de 3 mois
+
+                // Gestion de la date de fin
+                $duree = mt_rand(3,10); // génère une durée entre 3 et 10 jours
+                $dateDepart = (clone $dateArrivee)->modify("+$duree days");
+
+                $montant    = $mobilHome->getTarifJourHsMh() * $duree;
+
+                $client     = $users[mt_rand(0, count($users)-1)];
+                $comment    = $faker->paragraph();
+
+                $reservation    ->setClient($client)
+                                ->setAnnonce($mobilHome)
+                                ->setDateArrivee($dateArrivee)
+                                ->setDateDepart($dateDepart)
+                                ->setCreatedAt($createdAt)
+                                ->setMontant($montant)
+                                ->setCommentaire($comment);
+                                
+
+                $manager->persist($reservation);
+            }
+            
 
             // $product = new Product();
             // $manager->persist($product);

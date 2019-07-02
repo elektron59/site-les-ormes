@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Réservation n°{{booking.id}}{% endblock %}
+
+{% block body %}
+
+    {% set annonce = booking.annonce %}
+    {% set auteur = annonce.auteur %}
+    <div class="container">
+        <h1>Votre réservation (n°{{booking.id}})</h1>
+        
+        {% if app.request.query.get('withAlert') %}
+            <div class="alert alert-success">
+                <h4 class="alert-heading">Bravo !</h4>
+                <p>
+                    Votre réservation pour l'annonce 
+                    <strong>
+                    <a href="{{ path("annonces_show", {'slugMh' : annonce.slugMh}) }}">{{annonce.nomMh}}</a>
+                    </strong>
+                    a bien été prise en compte !
+                </p>
+            </div>
+        {% endif %}
+        
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2>Détails</h2>
+                    <dl class="row">
+                        <dt class="col-md-4">Numéro</dt>
+                        <dd class="col-md-8">{{booking.id}}</dd>
+                        <dt class="col-md-4">Date d'arrivée</dt>
+                        <dd class="col-md-8">{{booking.dateArrivee | date('d/m/Y')}}</dd>
+                        <dt class="col-md-4">Date de départ</dt>
+                        <dd class="col-md-8">{{booking.dateDepart | date('d/m/Y')}}</dd>
+                        <dt class="col-md-4">Nombre de nuits</dt>
+                        <dd class="col-md-8">{{booking.duration}}</dd>
+                        <dt class="col-md-4">Montant total</dt>
+                        <dd class="col-md-8">{{booking.montant}} &euro;</dd>
+                        <dt class="col-md-4">Commentaire</dt>
+                        <dd class="col-md-8">{{booking.commentaire}}</dd>
+                    </dl>
+
+                    <hr>
+
+                    <h2 class="alert-heading">Votre hôte</h2>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <img src="{{auteur.avatar}}" class="avatar avatar-medium" alt="{{auteur.fullname}}">
+                        </div>
+                        <div class="col-9">
+                            <h4>
+                                <a href="{{ path('user_show', {'slug': auteur.slug}) }}">{{auteur.fullname}}</a>
+                            </h4>
+
+                            <span class="badge badge-primary">{{auteur.mobilhomes | length}} annonces</span>
+                        </div>
+                    </div>
+                    {{auteur.presentation | raw}}
+
+                    <a href="{{ path("user_show", {'slug' : auteur.slug}) }}" class="btn btn-primary">Plus d'infos sur {{auteur.prenom}}</a>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="alert-heading">Votre hébergement</h2>
+
+                    <h4>
+                        <a href="{{ path('annonces_show', {'slugMh': annonce.slugMh}) }}">{{annonce.nomMh}}</a>
+                    </h4>
+
+                    <img src="{{annonce.photoPrincipaleMh}}" alt="Image de {{annonce.nomMh}}" class="img-fluid">
+                    <hr>
+                    {{ annonce.presentationMh | raw}}
+                    <hr>
+                    {{ annonce.detailMh | raw}}
+                    <a href="{{ path('annonces_show', {'slugMh': annonce.slugMh}) }}" class="btn btn-primary">Plus d'informations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

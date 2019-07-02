@@ -62,7 +62,7 @@ class MobilHomeController extends AbstractController
 
             return $this->redirectToRoute('annonces_show', [
                 'slugMh'=> $mobilhome->getSlugMh()
-            ]);// Crée une Response qui dmande une redirection sur une autre page
+            ]);// Crée une Response qui demande une redirection sur une autre page
         }
         return $this->render('mobil_home/new.html.twig', [
             'form' => $form->createView()

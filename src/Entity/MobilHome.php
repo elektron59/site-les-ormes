@@ -21,21 +21,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class MobilHome
 {
-    /**
-     * Permet d'initialiser le slug avant la création et avant la mise à jour de l'entité
-     * 
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     * 
-     * @return void
-     */
-
-    public function initializeSlug(){
-        if(empty($this->slugMh)) { // Si slugMh est vide
-            $slugify = new Slugify();
-            $this->slugMh = $slugify->slugify($this->nomMh); // transforme en slug nomMh
-        }
-    }
 
     /**
      * @ORM\Id()
@@ -137,9 +122,61 @@ class MobilHome
      */
     private $auteur;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="annonce")
+     */
+    private $bookings;
+
+    
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
+    }
+
+        /**
+     * Permet d'initialiser le slug avant la création et avant la mise à jour de l'entité
+     * 
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+
+    public function initializeSlug(){
+        if(empty($this->slugMh)) { // Si slugMh est vide
+            $slugify = new Slugify();
+            $this->slugMh = $slugify->slugify($this->nomMh); // transforme en slug nomMh
+
+        }
+    }
+
+    /**
+     * Permet d'obtenir un tableau des jours qui ne sont pas disponibles pour cette annonce
+     *
+     * @return array Un tableau d'objets DateTime représentant les jours d'occupation
+     */
+    public function getNotAvailableDays() {
+        $notAvailableDays = [];// Tableau qui contiendra l'ensemble des date déjà réservées
+
+        foreach ($this->bookings as $booking) {
+            // Calculer les jours qui se trouvent entre la date d'arrivée et la date de départ
+            $resultat = range(
+                $booking->getDateArrivee()->getTimestamp(),
+                $booking->getDateDepart()->getTimestamp(),
+                24 * 60 * 60
+            );
+
+            $days = array_map(function($dayTimestamp){
+                return new \DateTime(date('Y-m-d', $dayTimestamp));
+            }, $resultat);
+
+            $notAvailableDays = array_merge($notAvailableDays, $days);
+        } 
+
+        return $notAvailableDays;
+
     }
 
     public function getId(): ?int
@@ -366,6 +403,37 @@ class MobilHome
     public function setAuteur(?User $auteur): self
     {
         $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Reservation $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setAnnonce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Reservation $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getAnnonce() === $this) {
+                $booking->setAnnonce(null);
+            }
+        }
 
         return $this;
     }

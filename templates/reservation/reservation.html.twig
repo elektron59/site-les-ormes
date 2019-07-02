@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver le mobil home : {{mobilhome.nomMh}}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha256-siyOpF/pBWUPgIcQi17TLBkjvNgNQArcmwJB8YvkAgg=" crossorigin="anonymous" />
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Réservez pour l'annonce : {{mobilhome.nomMh}}</h1>
+
+        <p>C'est avec plaisir que nous vous accueillerons au Camping "Le Domaine les Ormes"
+        <strong>, dites nous tout, on s'occupe du reste !</strong></p>
+
+        {{ form_start(form) }}
+        <div class="alert alert-light">
+            <h2>Commencez par nous dire quelles sont les dates qui vous intéressent !</h2>
+            <div class="row">
+                <div class="col">
+                    {{form_row(form.dateArrivee)}}
+                </div>
+                <div class="col">
+                    {{form_row(form.dateDepart)}}
+                </div>
+            </div>        
+            <h4 class ="mt-3">Montant du séjour : <span id="montant">...</span> &euro;</h4>
+            <span id="days">0</span> nuit(s) à {{mobilhome.tarifJourHsMh}} &euro;/nuit
+
+            <h4 class =  "mt-3">Vous avez un commentaire ?</h4>
+            {{form_row(form.commentaire)}}
+        </div>
+
+
+        <h2>Vous avez terminé !</h2>
+        <p>Vacances, Week-ends, Hébergement le temps d'un chantier ? C'est avec plaisir que nous vous accueillerons au "Domaine Les Ormes"</p>
+
+        <button type="submit" class="btn btn-success">Je réserve !</button>
+        {{form_end(form)}}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha256-bqVeqGdJ7h/lYPq6xrPv/YGzMEb6dNxlfiTUHSgRCp8=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#reservation_dateArrivee, #reservation_dateDepart').datepicker({
+            format: 'dd/mm/yyyy',
+            datesDisabled: [
+                {% for day in mobilhome.notAvailableDays %}
+                    "{{ day.format('d/m/Y') }}",
+                {% endfor %}
+            ],
+            startDate: new Date()
+        });
+
+        $('#reservation_dateArrivee, #reservation_dateDepart').on('change', calculateAmount);
+    });
+
+    function calculateAmount() {
+        // On recupère les dates
+        const dateDepart = new Date($('#reservation_dateDepart').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
+        // ex 18/09/2019
+        // (\d+)\/(\d+)\/(\d{4})
+        // 2019-09-18   '$3-$2-$1
+        
+        const dateArrivee = new Date($('#reservation_dateArrivee').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
+
+        if(dateArrivee && dateDepart && dateArrivee < dateDepart) {
+            const DAY_TIME = 24 * 60 * 60 * 1000; // Un jour en milliseconde
+
+            const interval = dateDepart.getTime() - dateArrivee.getTime(); // ecart entre des dates, résultat en millisecondes
+            const days = interval / DAY_TIME;
+            const amount = days * {{ mobilhome.tarifJourHsMh}};
+
+            $('#days').text(days);
+            $('#montant').text(amount.toLocaleString('fr-FR'));
+        }
+    }
+</script>
+{% endblock %}
