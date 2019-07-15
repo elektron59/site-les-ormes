@@ -7,15 +7,57 @@
 {% block body %}
 
     <div class="container">
-        <h1>Créer une nouvelle annonce</h1>
+        <h1 class="my-5">Créer une nouvelle annonce</h1>
 
         {{ form_start(form) }} {# permet d'afficher la balise ouvrante <form> avec l'action et la méthode #}
 
-        {{ form_widget(form) }} {# affiche un champ ou un groupe de champs #}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2>Informations générales</h2>
+                    <hr>
+                    {{ form_row(form.nomMh) }}
+                    {{ form_row(form.slugMh) }}
+                    {{ form_row(form.emplacementMh) }}
+                    {{ form_row(form.anneeMh) }}
+                    {{ form_row(form.surfaceMh) }}
+                    {{ form_row(form.surfaceEmplacementMh) }}
+                    {{ form_row(form.nbChambreMh) }}
+                    {{ form_row(form.nbPersonneMh) }}
+                </div>
+                <div class="alert alert-light">
+                    <h2>Détail de l'annonce</h2>
+                    <hr>
+                    {{ form_row(form.presentationMh) }}
+                    {{ form_row(form.detailMh) }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2>Tarifs</h2>
+                    <hr>
+                    {{ form_row(form.tarifJourHsMh) }}
+                    {{ form_row(form.tarifSemaineHsMh) }}
+                    {{ form_row(form.tarifJourBsMh) }}
+                    {{ form_row(form.tarifSemaineBsMh) }}
+                </div>
+                <div class="alert alert-light">
+                    <h2>Images de l'annonce</h2>
+                    <hr>
+                    {{ form_row(form.photoPrincipaleMh) }}
+                    {{ form_row(form.images) }}
+                </div>
+            </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Créer la nouvelle annonce</button>
-
-        {{ form_end(form )}} {# Affiche la fin du formulaire et inclue un jeton CSRF pour la sécurité #}
+        <div class="alert alert-success clearfix">
+            <h2 class="alert-heading">Sauvegarder mon annonce</h2>
+            <p>Vous êtes sur le point de créer votre annonce.</p>
+            <button type="submit" class="btn btn-primary float-right">
+            <i class="fas fa-check"></i>
+            Créer la nouvelle annonce</button>
+        </div>
+            {{ form_end(form )}} {# Affiche la fin du formulaire et inclue un jeton CSRF pour la sécurité #}
 
     </div>
 

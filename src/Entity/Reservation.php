@@ -33,7 +33,7 @@ class Reservation
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Date(message="Attention la date d'arrivée doit être au bon format !")
-     * @Assert\GreaterThan("today", message="La date d'arrivée doit être ultérieure à la date d'aujourd'hui !")
+     * @Assert\GreaterThan("today", message="La date d'arrivée doit être ultérieure à la date d'aujourd'hui !", groups={"front"})
      */
     private $dateArrivee;
 
@@ -63,6 +63,7 @@ class Reservation
      * Callback appelé à chaque fois qu'on crée une réservation
      * 
      * @ORM\PrePersist
+     * @ORM\PreUpdate
      *
      * @return void
      */
@@ -178,12 +179,12 @@ class Reservation
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->ceatedAt;
+        return $this->createdAt;
     }
 
     public function setCreatedAt(\DateTimeInterface $ceatedAt): self
     {
-        $this->ceatedAt = $ceatedAt;
+        $this->ceatedAt = $createdAt;
 
         return $this;
     }

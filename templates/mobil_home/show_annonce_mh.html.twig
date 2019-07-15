@@ -55,6 +55,40 @@
                         <span class="sr-only">Next</span>
                         </a>
                     </div>
+
+                    <hr>
+
+                    {% if annonce.comments|length > 0 %}
+                        <h2 class="mb3">Commentaires de nos campeurs</h2>
+
+                        <div class="alert alert-info">
+                            <h4 class="alert heading text-center">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        Note globale donnée par nos campeurs<br>
+                                        <small>Cette moyenne est calculée sur {{annonce.comments|length}} avis !</small>
+                                    </div>
+                                    <div class="col">
+                                        {% include "partials/rating.html.twig" with {'rating': annonce.avgRatings} %}
+                                    </div>
+                                </div>
+                            </h4> 
+                        </div>
+                        {% for comment in annonce.comments %}
+                            <div class="bg-light rounded mb-3 py-3 px-3">
+                                <strong>{{ comment.author.prenom }}</strong> a dit : 
+                                <blockquote>
+                                    {{comment.content}}
+                                </blockquote>
+                                <strong>Note donnée : </strong>
+                                {% include "partials/rating.html.twig" with {'rating' : comment.rating} %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <h2>Cette annonce n'a pas encore reçu de commentaires...</h2>
+                    {% endif %}
+                    
+
                 </div>            
                 
             </div>
@@ -83,13 +117,13 @@
 
             <div class="col6">
                 <span class="badge badge-primary m-3">Haute Saison</span> Date haute saison.
-                <h3>{{annonce.tarifJourHsMh}} &euro;/jour </h3>
-                <h3>{{annonce.tarifSemaineHsMh}} &euro;/semaine </h3>
+                <h3>{{annonce.tarifJourHsMh | number_format(2, ',',' ')}} &euro;/jour </h3>
+                <h3>{{annonce.tarifSemaineHsMh | number_format(2, ',',' ')}} &euro;/semaine </h3>
             </div>
             <div class="col6">
                 <span class="badge badge-success m-3">Basse saison</span> Date basse saison.
-                <h3>{{annonce.tarifJourBsMh}} &euro;/jour </h3>
-                <h3>{{annonce.tarifSemaineBsMh}} &euro;/semaine </h3>
+                <h3>{{annonce.tarifJourBsMh | number_format(2, ',',' ')}} &euro;/jour </h3>
+                <h3>{{annonce.tarifSemaineBsMh | number_format(2, ',',' ')}} &euro;/semaine </h3>
             </div>
         </div>
     </div>

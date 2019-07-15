@@ -10,19 +10,28 @@
                     {{ mobilhome.nomMh }}
                 </a>
             </h3>
+            
+            <h5 class="text-center">
+                {% if mobilhome.comments|length > 0 %}
+                    {% include "partials/rating.html.twig" with {'rating':mobilhome.avgRatings} %}
+                {% else %}
+                    <small>Pas encore noté</small>
+                {% endif %}
+                
+            </h5>
             <h6 class="text-center">
                 {{ mobilhome.surfaceMh }} m2 - {{ mobilhome.nbChambreMh }} chambre(s) - {{ mobilhome.nbpersonneMh }} personnes
             </h6>
             {{ mobilhome.presentationMh | raw }} {# le filtre raw permet de faire interpréter le code html contenu dans la base de données par le navigateur#}
-            <H4>A partir de {{ mobilhome.tarifJourHsMh }} &euro; par jour ou {{ mobilhome.tarifSemaineHsMh }} &euro; par semaine (hors saison)</H4>
+            <H4>A partir de {{ mobilhome.tarifJourHsMh | number_format(2, ',',' ') }} &euro; par jour ou {{ mobilhome.tarifSemaineHsMh | number_format(2, ',',' ') }} &euro; par semaine (hors saison)</H4>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 align-center">
                 <a href="{{ url }}" class="btn btn-green-ormes btn-lg btn-block mb-2">en savoir plus</a>
             </div>
-            <div class="col-md-6">
+            <div class="col-12">
                 {% if app.user and app.user == mobilhome.auteur %}
-                    <a href="{{ path('annonces_edit',{'slugMh':mobilhome.slugMh}) }}" class="btn btn-green-ormes btn-lg btn-block mb-2">Modifier</a>
+                    <a href="{{ path('annonces_edit',{'slugMh':mobilhome.slugMh}) }}" class="btn btn-primary btn-lg btn-block mb-2">Modifier</a>
                 {% endif %}
             </div>
         </div>

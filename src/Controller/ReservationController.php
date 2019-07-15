@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\MobilHome;
+use App\Form\CommentType;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +23,8 @@ class ReservationController extends AbstractController
     public function reservation(MobilHome $mobilhome, Request $request, ObjectManager $manager)
     {
         $booking = new Reservation();
-        $form = $this->createForm(ReservationType::class, $booking);
+        $form = $this->createForm(ReservationType::class, $booking, [
+        ]);
 
         $form->handleRequest($request);
 
@@ -58,11 +61,33 @@ class ReservationController extends AbstractController
      * @Route("/reservation/{id}", name="reservation_show")
      *
      * @param Reservation $booking
+     * @param Request $request
+     * @param ObjectManager $manager
      * @return Response
      */
-    public function show(Reservation $booking) {
+    public function show(Reservation $booking, Request $request, ObjectManager $manager) {
+        $comment = new Comment();
+
+        $form =  $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $comment    ->setAd($booking->getAnnonce())
+                        ->setAuthor($this->getUser());
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Votre commentaire a bien été pris en compte !"
+            );
+        }
+ 
         return $this->render('reservation/show.html.twig', [
-            'booking' => $booking
+            'booking' => $booking,
+            'form' => $form->createView()
         ]);
     }
 }
