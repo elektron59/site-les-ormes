@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\MobilHome;
 use App\Form\AnnonceType;
+use App\Service\PaginationService;
 use App\Repository\MobilHomeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -14,13 +15,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminAdController extends AbstractController
 {
     /**
-     * @Route("/admin/ads", name="admin_ads_index")
+     * @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_index")
      */
-    public function index(MobilHomeRepository $repo)
+    public function index(MobilHomeRepository $repo, $page, PaginationService $pagination)
     {
-        $ads = $repo->findAll();
+        $pagination ->setEntityClass(MobilHome::class)
+                    ->setPage($page);
+
         return $this->render('admin/ad/index.html.twig', [
-            'ads' => $ads
+            'pagination' => $pagination
         ]);
     }
 
