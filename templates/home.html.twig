@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %} 
-
     <!-- Slider -->
     <div class="bd-example" id="SliderIndex">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -86,14 +85,17 @@
                         <div class="row">
                             <div class="col">
                                 <div class="info-header">
-                                    <h2 class="h1 my-4">Nos locations</h2>
+                                    <h2 class="h1 my-4">Nos locations les plus appréciées</h2>
                                     <p class="lead pb-5">Au "Domaine les Ormes **" pour vos vacances, vous pouvez louer des mobil homes et des emplacements pour vos tentes, caravanes et camping-cars, et pour vos réceptions nous pouvons vous proposer la location de notre salle de réception. </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row">   
+                            {% for data in ads %}
+                                {% include "mobil_home/_annonce.html.twig" with {'mobilhome': data.mobilhome} %}
+                            {% endfor %}
 
-                            <div class="col-lg-4 col-md-6 col-sm-12">
+                            {# <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <a href="#">
@@ -131,7 +133,7 @@
                                     </div>
                                     <button type="button" class="btn btn-green-ormes btn-lg btn-block">en savoir plus</button>
                                 </div>
-                            </div>
+                            </div> #}
                         </div>
                     </div>
                 </section>

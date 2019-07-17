@@ -19,6 +19,17 @@ class MobilHomeRepository extends ServiceEntityRepository
         parent::__construct($registry, MobilHome::class);
     }
 
+    public function findBestAds($limit){
+        return $this->createQueryBuilder('a')
+                    ->select('a as mobilhome, AVG(c.rating) as avgRatings')
+                    ->join('a.comments', 'c')
+                    ->groupBy('a')
+                    ->orderBy('avgRatings', 'DESC')
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return MobilHome[] Returns an array of MobilHome objects
     //  */
